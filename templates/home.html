@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Football Players Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<h1>Football Players Game</h1>
+	<p>Can you name a player who played with both of these players on the same team in any year?</p>
+	<table>
+		<tr>
+			<th>Player 1</th>
+			<th>Player 2</th>
+			<th>Possible Answers</th>
+		</tr>
+		<tr>
+			<td>{{ player1 }}</td>
+			<td>{{ player2 }}</td>
+			<td>
+				<table>
+					{% for player in players %}
+					<tr><td>{{ player }}</td></tr>
+					{% endfor %}
+				</table>
+			</td>
+		</tr>
+	</table>
+	<form method="POST" action="/check">
+		<label for="guess">Your Guess:</label>
+		<input type="text" id="guess" name="guess">
+		<input type="submit" value="Submit">
+	</form>
+	{% if message %}
+	<p>{{ message }}</p>
+	{% endif %}
+	{% if streak %}
+	<p>Your Current Streak: {{ streak }}</p>
+	{% endif %}
+</body>
+</html>

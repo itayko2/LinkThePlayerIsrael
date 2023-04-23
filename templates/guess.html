@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Guess the common teammate</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+	<h1>Guess the common teammate</h1>
+	<p>Who has played with both {{ player1 }} and {{ player2 }}?</p>
+	<form action="/guess" method="POST">
+		<label for="guess">Guess:</label>
+		<input type="text" id="guess" name="guess" required>
+		<input type="hidden" id="player1" name="player1" value="{{ player1 }}">
+		<input type="hidden" id="player2" name="player2" value="{{ player2 }}">
+		<button type="submit">Submit</button>
+	</form>
+	{% if wrong_guesses %}
+	<div class="center">
+	  <h2>Wrong Guesses:</h2>
+	  <table>
+		<thead>
+		  <tr>
+			<th>Wrong Guess</th>
+		  </tr>
+		</thead>
+		<tbody>
+		  {% for guess in wrong_guesses %}
+		  <tr>
+			<td>{{ guess }}</td>
+		  </tr>
+		  {% endfor %}
+		</tbody>
+	  </table>
+	</div>
+	{% endif %}
+	<a href="/"></a>
+</body>
+</html>

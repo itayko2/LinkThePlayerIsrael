@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Guess the Player</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        $(document).ready(function() {
+            // Get the targets array from Flask and convert it to a JavaScript array
+            var targets = {{ targets|tojson }};
+            // Get the guess input element
+            var guessInput = $('#guess');
+            // Create a dropdown menu for the remaining possibilities
+            var remainingDropdown = $('<select></select>');
+            // Initialize the dropdown with all targets as options
+            $.each(targets, function(index, value) {
+                remainingDropdown.append($('<option></option>').attr('value', value).text(value));
+            });
+            // Add the dropdown to the DOM
+            guessInput.after(remainingDropdown);
+            // Listen for changes to the guess input
+            guessInput.on('input', function() {
+                // Get the current value of the guess input
+                var guessValue = guessInput.val();
+                // Filter the targets array to find the remaining possibilities that match the current value
+                var remainingTargets = targets.filter(function(target) {
+                    return target.toLowerCase().startsWith(guessValue.toLowerCase());
+                });
+                // Clear the dropdown
+                remainingDropdown.empty();
+                // Add the remaining possibilities as options to the dropdown
+                $.each(remainingTargets, function(index, value) {
+                    remainingDropdown.append($('<option></option>').attr('value', value).text(value));
+                });
+            });
+            // Listen for changes to the dropdown and update the guess input accordingly
+            remainingDropdown.on('change', function() {
+                guessInput.val(remainingDropdown.val());
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <h1 class="text-center">Guess the Player</h1>
+                {% if message %}
+                <p>{{ message }}</p>
+                {% endif %}
+                {% if score > 0 %}
+                <p class="text-center">Score: {{ score }}</p>
+                {% endif %}
+                <form action="/" method="post">
+                    <div class="form-group">
+                        <label for="guess">Select a player:</label>
+                        <input type="text" class="form-control" name="guess" id="guess">
+                    </div>
+                </form>
+                <h2>History:</h2>
+                <ul>
+                    {% for guess in history %}
+                    <li>{{ guess }}</li>
+                    {% endfor %}
+                </ul>
+                <p>Guesses remaining: {{ guesses }}</p>
+                {% if guesses == 0 %}
+                <p>You're out of guesses!</p>
+                <form action="/reset" method="post">
+                    <input type="submit" class="btn btn-primary" value="Play again">
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

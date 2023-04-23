@@ -1,0 +1,126 @@
+/* Styles for the body */
+body {
+  background-color: #F0F0F0;
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+}
+
+/* Styles for the header */
+header {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 36px;
+  margin: 0;
+}
+
+/* Styles for the main content area */
+main {
+  margin: 20px auto;
+  max-width: 800px;
+  padding: 20px;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+p {
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+/* Styles for the form */
+form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+label {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+input[type="text"] {
+  font-size: 16px;
+  padding: 10px;
+}
+
+button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+/* Styles for the table */
+table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  max-width: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background-color: #333;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Styles for the current streak section */
+#current-streak {
+  font-size: 18px;
+  text-align: right;
+}
+
+#current-streak span {
+  font-weight: bold;
+}
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 20px;
+}
+
+ul {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.btn-primary {
+  margin-top: 10px;
+}
+
+.container {
+  margin-top: 50px;
+}
